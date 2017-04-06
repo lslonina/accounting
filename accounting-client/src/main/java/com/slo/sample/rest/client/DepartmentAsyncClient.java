@@ -2,10 +2,7 @@ package com.slo.sample.rest.client;
 
 import com.slo.sample.rest.client.model.Department;
 
-import javax.ws.rs.client.AsyncInvoker;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -25,16 +22,22 @@ public class DepartmentAsyncClient {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(BASE_URI).path("async").path("departments");
         AsyncInvoker asyncInvoker = webTarget.request(APPLICATION_JSON).async();
-        Future<Response> responseFuture = asyncInvoker.get();
-        System.out.println("Waiting for results");
-        Response response = responseFuture.get();
-        List<Department> depts = response.readEntity(new GenericType<List<Department>>() {
+        Future<List<Department>> responseFuture = asyncInvoker.get(new InvocationCallback<List<Department>>() {
+            @Override
+            public void completed(List<Department> response) {
+                System.out.println("Great success");
+                client.close();
+            }
+
+            @Override
+            public void failed(Throwable throwable) {
+                System.out.println("Failure");
+            }
         });
+        System.out.println("Waiting for results");
+        List<Department> departments = responseFuture.get();
 
-        depts.forEach(System.out::println);
-
-        response.close();
-        client.close();
+        departments.forEach(System.out::println);
     }
 
 }
