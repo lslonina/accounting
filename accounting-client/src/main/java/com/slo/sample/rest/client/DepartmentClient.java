@@ -1,8 +1,3 @@
-
-/*
- * Copyright (c) 2017 Nokia Networks. All rights reserved.
- */
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
