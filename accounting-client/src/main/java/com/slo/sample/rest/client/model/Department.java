@@ -1,6 +1,4 @@
-/*
- * Copyright (c) 2017 Nokia Networks. All rights reserved.
- */
+package com.slo.sample.rest.client.model;
 
 /**
  * @author Lukasz Slonina.

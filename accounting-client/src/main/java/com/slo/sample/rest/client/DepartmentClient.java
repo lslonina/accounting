@@ -1,3 +1,7 @@
+package com.slo.sample.rest.client;
+
+import com.slo.sample.rest.client.model.Department;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;

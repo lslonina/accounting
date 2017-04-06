@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2017 Nokia Networks. All rights reserved.
- */
 package com.slo.sample.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
