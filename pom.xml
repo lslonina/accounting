@@ -62,8 +62,8 @@
     </build>
 
     <modules>
-        <module>rest-service</module>
-        <module>rest-client</module>
+        <module>accounting-service</module>
+        <module>accounting-client</module>
     </modules>
 
 </project>
