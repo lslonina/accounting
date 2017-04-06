@@ -1,7 +1,6 @@
 package com.slo.sample.rest.department.model;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
@@ -10,12 +9,14 @@ import javax.validation.constraints.Size;
  */
 public class Department
 {
-    @NotNull
-    @DecimalMin( "1" )
+    @Min( value = 1, message = "Department Id must be a positive value" )
     private Integer id;
 
-    @Size( min = 1, max = 20 )
+    @Size( min = 1, max = 20, message = "Department Name length must be between 1 and 20 characters." )
     private String name;
+
+    @Size( min = 1, max = 20, message = "Department Location length must be between 1 and 20 characters." )
+    private String location;
 
 
     public Integer getId()
@@ -39,6 +40,18 @@ public class Department
     public void setName( String name )
     {
         this.name = name;
+    }
+
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+
+    public void setLocation( String location )
+    {
+        this.location = location;
     }
 
 

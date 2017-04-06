@@ -40,7 +40,7 @@ public class DepartmentService
 
     @POST
     @Consumes( MediaType.APPLICATION_JSON )
-    public void createDepartment( Department department )
+    public void createDepartment(@ValidDepartment Department department )
     {
         departmentsRepository.createDepartment( department );
     }
