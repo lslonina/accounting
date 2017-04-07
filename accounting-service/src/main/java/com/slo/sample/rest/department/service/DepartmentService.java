@@ -31,7 +31,7 @@ public class DepartmentService
 
 
     @GET
-    @Produces( MediaType.APPLICATION_JSON )
+    @Produces( { MediaType.APPLICATION_JSON, "application/csv" } )
     public Collection<Department> findAllDepartments()
     {
         return departmentsRepository.getDepartments();
@@ -40,7 +40,7 @@ public class DepartmentService
 
     @POST
     @Consumes( MediaType.APPLICATION_JSON )
-    public void createDepartment(@ValidDepartment Department department )
+    public void createDepartment( @ValidDepartment Department department )
     {
         departmentsRepository.createDepartment( department );
     }

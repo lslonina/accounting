@@ -1,5 +1,6 @@
 package com.slo.sample.rest;
 
+import com.slo.sample.rest.department.converter.CSVMessageBodyWriter;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -11,7 +12,7 @@ public class Application
 {
     public Application()
     {
-        register( ValidationConfigurationContextResolver.class );
+//        register( ValidationConfigurationContextResolver.class );
         packages( "com.slo.sample.rest" );
     }
 }
