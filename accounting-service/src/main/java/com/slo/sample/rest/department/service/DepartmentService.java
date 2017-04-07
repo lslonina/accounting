@@ -3,6 +3,7 @@ package com.slo.sample.rest.department.service;
 import com.slo.sample.rest.department.model.Department;
 import com.slo.sample.rest.department.repository.DepartmentsRepository;
 import com.slo.sample.rest.department.repository.InMemoryDepartmentsRepository;
+import com.slo.sample.rest.filter.RequestLogger;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @author Lukasz Slonina.
  */
 @Path( "departments" )
+@RequestLogger
 public class DepartmentService
 {
     private final DepartmentsRepository departmentsRepository;
@@ -45,6 +47,7 @@ public class DepartmentService
     @GET
     @Path( "{id}" )
     @Produces( MediaType.APPLICATION_JSON )
+    @RequestLogger
     public Response findDepartmentById(
         @PathParam( "id" ) Integer deptId,
         @Context Request request ) throws DepartmentNotFoundException

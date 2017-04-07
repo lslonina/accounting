@@ -1,5 +1,7 @@
 package com.slo.sample.rest.client;
 
+import com.slo.sample.rest.client.filter.JAXRSClientRequestFilter;
+import com.slo.sample.rest.client.filter.JAXRSClientResponseFilter;
 import com.slo.sample.rest.client.model.Department;
 
 import javax.ws.rs.client.Client;
@@ -18,6 +20,9 @@ public class DepartmentClient
     public static void main( String[] args )
     {
         Client client = javax.ws.rs.client.ClientBuilder.newClient();
+        client.register( JAXRSClientRequestFilter.class );
+        client.register( JAXRSClientResponseFilter.class );
+
         String BASE_URI = "http://localhost:8080/accounting";
         WebTarget webTarget = client.target( BASE_URI );
         // Append departments URI path to Base URI
