@@ -11,6 +11,7 @@ import javax.ws.rs.ext.ContextResolver;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -72,9 +73,9 @@ public class ValidationConfigurationContextResolver
         public List<String> getParameterNames( final Method method )
         {
             // See ContactCardTest#testAddInvalidContact.
-            if( "addContact".equals( method.getName() ) )
+            if( "setName".equals( method.getName() ) )
             {
-                return Arrays.asList( "contact" );
+                return Collections.singletonList( "name" );
             }
             return nameProvider.getParameterNames( method );
         }

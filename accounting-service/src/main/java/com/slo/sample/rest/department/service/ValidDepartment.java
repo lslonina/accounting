@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * @author Lukasz Slonina.
  */
 @Constraint( validatedBy = { ValidDepartmentValidator.class } )
-@Target( { ElementType.FIELD, ElementType.PARAMETER } )
+@Target( { ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD } )
 @Retention( value = RetentionPolicy.RUNTIME )
 public @interface ValidDepartment
 {

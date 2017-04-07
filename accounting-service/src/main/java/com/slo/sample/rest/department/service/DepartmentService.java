@@ -4,9 +4,13 @@ import com.slo.sample.rest.department.model.Department;
 import com.slo.sample.rest.department.repository.DepartmentsRepository;
 import com.slo.sample.rest.department.repository.InMemoryDepartmentsRepository;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Collection;
+import java.util.Date;
 
 
 /**
@@ -38,9 +42,44 @@ public class DepartmentService
     }
 
 
+    @GET
+    @Path( "{id}" )
+    @Produces( MediaType.APPLICATION_JSON )
+    public Response findDepartmentById(
+        @PathParam( "id" ) Integer deptId,
+        @Context Request request ) throws DepartmentNotFoundException
+    {
+        Department department = departmentsRepository.getDepartment( deptId );
+
+        if( department == null )
+        {
+            throw new DepartmentNotFoundException( "Department does not exist: " + deptId );
+        }
+
+        LocalDateTime lastModifiedDate = department.getModifiedDate();
+        Date from = Date.from( lastModifiedDate.toInstant( ZoneOffset.UTC ) );
+
+        Response.ResponseBuilder builder = request.evaluatePreconditions( from );
+
+        if( builder == null )
+        {
+            builder = Response.ok( department );
+            CacheControl cc = new CacheControl();
+            cc.setMaxAge( 86400 );
+            cc.setPrivate( true );
+
+            builder.lastModified( from );
+
+            builder.cacheControl( cc );
+        }
+
+        return builder.build();
+    }
+
+
     @POST
     @Consumes( MediaType.APPLICATION_JSON )
-    public void createDepartment( @ValidDepartment Department department )
+    public void createDepartment( @Valid @ValidDepartment Department department )
     {
         departmentsRepository.createDepartment( department );
     }

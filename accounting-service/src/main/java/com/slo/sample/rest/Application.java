@@ -2,6 +2,7 @@ package com.slo.sample.rest;
 
 import com.slo.sample.rest.department.converter.CSVMessageBodyWriter;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
 
 import javax.ws.rs.ApplicationPath;
 
@@ -12,6 +13,7 @@ public class Application
 {
     public Application()
     {
+        property( ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true );
 //        register( ValidationConfigurationContextResolver.class );
         packages( "com.slo.sample.rest" );
     }
