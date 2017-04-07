@@ -22,8 +22,13 @@ public class Application
         property( ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true );
         packages( "com.slo.sample.rest" );
 
-        String configSysInfoParam = context.getInitParameter( "system.info.allow" );
+        String systemInfoValue = context.getInitParameter( "system.info.allow" );
+        addServerInfo( systemInfoValue );
+    }
 
+
+    private void addServerInfo( String configSysInfoParam )
+    {
         boolean allowViewServerInfo =
             (configSysInfoParam == null) ? true : Boolean.valueOf( configSysInfoParam );
 

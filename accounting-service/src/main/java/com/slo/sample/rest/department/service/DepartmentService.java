@@ -37,7 +37,7 @@ public class DepartmentService
 
 
     @GET
-    @Produces( { MediaType.APPLICATION_JSON, "application/csv" } )
+    @Produces( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, "application/csv" } )
     public Collection<Department> findAllDepartments()
     {
         return departmentsRepository.getDepartments();
@@ -66,7 +66,9 @@ public class DepartmentService
 
         if( builder == null )
         {
-            builder = Response.ok( department );
+            builder = Response.ok();
+            builder.links( getLinks(department.getLocation()) ).entity( department );
+
             CacheControl cc = new CacheControl();
             cc.setMaxAge( 86400 );
             cc.setPrivate( true );
@@ -74,9 +76,17 @@ public class DepartmentService
             builder.lastModified( from );
 
             builder.cacheControl( cc );
+
         }
 
         return builder.build();
+    }
+
+
+    private Link getLinks( String location )
+    {
+//        Link.fromUri( "{id}/employees" )
+        return null;
     }
 
 

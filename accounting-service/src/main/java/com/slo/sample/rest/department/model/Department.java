@@ -2,8 +2,12 @@ package com.slo.sample.rest.department.model;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -11,7 +15,7 @@ import java.util.Date;
 /**
  * @author Lukasz Slonina.
  */
-@XmlRootElement
+//@XmlRootElement
 public class Department
 {
     @Min( value = 1, message = "Department Id must be a positive value" )
@@ -22,6 +26,14 @@ public class Department
 
     @Size( min = 1, max = 20, message = "Department Location length must be between 1 and 20 characters." )
     private String location;
+
+//    @XmlElement( name = "link" )
+//    @XmlJavaTypeAdapter( XmlAdapter.class )
+//    public Link getEmployeeLink()
+//    {
+//        return Link.fromUri( "{id}/employees" ).rel( "employees" ).build( id );
+//    }
+//
 
     @XmlTransient
     private LocalDateTime modifiedDate;
@@ -77,6 +89,7 @@ public class Department
     {
         return modifiedDate;
     }
+
 
     private void updateModifiedDate()
     {

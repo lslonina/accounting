@@ -17,7 +17,8 @@ public class JAXRSContainerPrematchingRequestFilter
     {
         if( requestContext.getMethod().equals( "POST" ) )
         {
-            System.out.println("POST: \n" + requestContext.getRequest().toString());
+            System.out.println("POST: \n\t" + requestContext.getRequest().toString());
+            System.out.println("\t" + requestContext.getMediaType());
 //            requestContext.setMethod( "PUT" );
         }
     }
