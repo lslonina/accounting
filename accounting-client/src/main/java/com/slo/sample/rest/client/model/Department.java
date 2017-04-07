@@ -7,6 +7,7 @@ public class Department
 {
     private Integer id;
     private String name;
+    private String location;
 
 
     public Integer getId()
@@ -37,5 +38,13 @@ public class Department
     public String toString()
     {
         return "Department{" + "id=" + id + ", name='" + name + '\'' + '}';
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

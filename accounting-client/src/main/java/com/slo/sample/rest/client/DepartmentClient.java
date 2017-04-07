@@ -18,7 +18,7 @@ public class DepartmentClient
     public static void main( String[] args )
     {
         Client client = javax.ws.rs.client.ClientBuilder.newClient();
-        String BASE_URI = "http://localhost:8080/webresources";
+        String BASE_URI = "http://localhost:8080/accounting";
         WebTarget webTarget = client.target( BASE_URI );
         // Append departments URI path to Base URI
         WebTarget resource = webTarget.path( "departments" );
